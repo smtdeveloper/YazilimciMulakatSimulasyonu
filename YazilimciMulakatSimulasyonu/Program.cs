@@ -1,7 +1,10 @@
 ﻿using System.Diagnostics.Metrics;
 using System;
+using System.Numerics;
+using YazilimciMulakatSimulasyonu;
+using System.Text;
 
-Console.WriteLine("1. Yazılımcı Mülakat Simülasyonu");
+Console.WriteLine("Yazılımcı Mülakat Simülasyonu");
 
 
 Console.WriteLine("1.SORU : Kendini tanıt ?");
@@ -16,6 +19,7 @@ Console.WriteLine("1.SORU : Kendini tanıt ?");
 Console.WriteLine("2.Soru : neden bizi tercih ediyorsun ?");
 // izmir gibi güzel bir sehirde yasamak ve .net alanında calişmak istediğim için bu fırsatı değerlendirmek istiyorum
 // Not : eski iş yerindeki çalıstığın firma isimlerini verme !
+// eski iş yerine gömme, düzgünce daha iyi iş arayısını geçtiğimi belirt, maaş ödenmedi olabilir
 
 
 Console.WriteLine("3.SORU OOP ilkileri nelerdir açıkla, faydaları nedir ?");
@@ -75,99 +79,185 @@ Console.WriteLine("8.Soru Value ve Referans typler nelerdir. ");
 
 
 Console.WriteLine("9.SORU kod Satırını Azalt ! ");
-public class DataProvider
-{
-    private static DataProvider instance;
-    public static DataProvider Instance
-    {
-        get
-        {
-            if (instance is null)
-            {
-                instance = new DataProvider();
-                return instance;
-            }
-            else 
-            {
-                return instance;
-            }
-        }
-    }
-}
-
-//9.Soru Cevap 1 - Doğru
-public sealed class DataProvider1
-{
-    private static readonly DataProvider1 instance = new DataProvider1();
-    public static DataProvider1 Instance => instance; //public static DataProvider Instance { get { return instance; } }
-    private DataProvider1() {}
-
-}
-
-//9.Soru Cevap 2 - Doğru
-public class DataProvider2
-{
-    private static  DataProvider2 instance; 
-    public static DataProvider2 Instance => instance ?? (instance = new DataProvider2());  // ?? null kontrolü yapar null ise sag değilse sol calısır.
-}
-
-
-// 9.Soru CAVAP 3 - YANLIŞ :  BU KOD AYNI İŞE YARAR MI ?
-// Hayır, bu kod instance alanına hiçbir değer atanmadığından, Instance özelliği her zaman null dönecektir.
-// Bu nedenle, DataProvider sınıfının yalnızca bir örneğini tutmak için kullanılan bir özellik veya alan yoktur ve her çağrıda
-// yeni bir örnek oluşturulur.
-//Singleton tasarım deseni, sınıfın yalnızca bir örneğini oluşturmak ve buna erişimi sağlamak için kullanılır.
-//İkinci örneği önlemek için sınıfın yalnızca bir kez örneklendirilmesi gerekir. Bu kod, Singleton tasarım desenini uygulamaz ve
-//yalnızca bir örnek oluşturma işlevselliği sağlamaz.
-public class DataProvider3
-{
-    private static DataProvider3 instance;
-    public static DataProvider3 nstance { get; set; }
-
-}
-
+// DataProvider classında yazdık !
+DataProvider dataProvider = new DataProvider();
 
 // Dip not : Direk kod yazma, soruyu iyi anladığına emin ol ve soru sor !
-
 // örn : sayıları kullanıcıdan mı almalıyım yoksa belirli bir sayı aralığına kadar mı yapmalıyım.
 
-// 10. Soru FizzBuzz oyunu
+
+Console.WriteLine("10. Soru FizzBuzz oyunu");
 // Belirli bir sayı aralığındaki sayılar ekrana yazdırırken,
 // eğer sayı 3'ün katı ise 'Fizz'.
 // eğer sayı 5'im katı ise 'Buzz'.
 // her ikisinin katı ise 'FizzBuzz' yazdıracağız.
+FizzBuzzApp FizzBuzzApp = new FizzBuzzApp();
+// FizzBuzzApp clasında yazdık !
 
-// Cevap:
-public class FizzBuzzApp 
+Console.WriteLine("11. isimlendirmenin önemi ");
+// 1. Kodun anlaşılabilirliğini artırır: İsimlendirme, kodun okunabilirliğini artırır ve
+// kodun ne yaptığını anlamak için daha az zaman harcamamızı sağlar.
+// Ayrıca, doğru bir şekilde isimlendirilmiş kod, diğer geliştiricilerin kodu daha
+// kolay anlamalarını ve sürdürmelerini sağlar.
+// 2. Hataları azaltır
+// 3. Kodun yeniden kullanılabilirliğini artırır
+// 4. Kodun bakımını kolaylaştırır
+// 5. Kodun genel kalitesini artırır
+// Bu, kodun daha kolay okunmasını ve anlaşılmasını sağlar,
+// bu da daha az hata yapmamızı ve daha iyi bir kod yazmamızı sağlar.
+
+Console.WriteLine("12. Delegate nedir ?");
+// Delegate, C# ve diğer programlama dillerinde kullanılan bir kavramdır.
+// Bir delegate, bir metodu veya yöntemi temsil eder. Bu, başka bir kod bloğuna, metoda veya
+// fonksiyona, kendi belirleyeceği parametreleri ve geri dönüş değerini kullanarak bir metodu
+// çağırma yetkisi verir.
+// asenkron işlemlerde ve çoklu thread programlamada sıklıkla kullanılır.
+// Bir delegate, olayların tetiklenmesini sağlayabilir veya birden fazla iş parçasını aynı anda
+// çalıştırabilir.
+
+Console.WriteLine("13. Big int nedir ?");
+// C# System.Numerics adlı bir isim alanı içinde BigInteger sınıfını sağlar.
+// BigInteger sınıfı, işlem belleği sınırlamaları olmadan tam sayılarla çalışmanızı sağlar ve böylece
+// çok büyük veya çok küçük sayıları temsil edebilirsiniz.
+
+///// c# big int değer aralığın ?
+// BigInteger.MinValue, sınırsız negatif tam sayıları temsil ederken,
+// BigInteger.MaxValue sınırsız pozitif tam sayıları temsil eder.
+
+///// c# big int ramde kapladığı alan ?
+// C# BigInteger sınıfı, işlem belleği sınırlamaları olmadan tam sayılarla çalışmanızı sağlar.
+// Bu nedenle, BigInteger nesneleri oldukça büyük olabilir ve daha fazla bellek kullanabilirler.
+
+Console.WriteLine("14. Thread nedir ?");
+// Thread sınıfı, bir iş parçacığı oluşturmanıza, başlatmanıza ve yönetmenize olanak tanır.
+// Ayrıca, ThreadPool sınıfı da bir dizi iş parçacığı oluşturmanıza ve bunları iş kuyruklarına eklemenize olanak tanır.
+// Thread'lerin doğru bir şekilde yönetilmesi, uygulamanın performansını artırabilir.
+// Ancak, thread'lerin yanlış kullanımı, uygulamanın kararlılığını ve performansını olumsuz etkileyebilir. 
+
+
+Console.WriteLine("15. unit test nedir ?");
+// Unit testlerinin yazılması, yazılımın kalitesini artırabilir ve hataların erken tespit edilmesine yardımcı olabilir. Bu testler, yazılımın bütünlüğünü ve işlevselliğini sağlamaya yardımcı olan bir güvenlik ağı sağlayabilir. Ayrıca, testlerin otomatik olarak çalıştırılması, manuel testlerin tekrarlanması için zaman ve maliyet tasarrufu sağlayabilir.
+// Unit testler, birim testi yazılımı için çeşitli kütüphaneler ve çerçeveler kullanılarak yazılabilir. Örneğin, C# için NUnit, xUnit.net, MSTest ve Java için JUnit ve TestNG, popüler birim testi kütüphaneleridir.
+
+Console.WriteLine("16. Encoding nedir ?");
+// Encoding, karakter dizilerini bayt dizilerine ve bayt dizilerini karakter dizilerine dönüştürmek
+// için kullanılan bir işlemdir. Bir karakter dizisi, bir dizi karakterden oluşurken, bir bayt dizisi,
+// bir dizi bitlerden oluşur. Encoding işlemi, karakter dizilerinin bayt dizilerine dönüştürülmesi veya
+// bayt dizilerinin karakter dizilerine dönüştürülmesi için kullanılan bir algoritma setidir.
+
+// C# programlama dilinde, Encoding işlemleri için System.Text.Encoding sınıfı kullanılır.
+// Bu sınıf, ASCII, UTF-8, UTF-16 ve diğer popüler kodlama sistemlerinin yanı sıra özel kodlama
+// sistemlerini de destekler.
+
+Console.WriteLine("17. Soru çıktısı ne olur ?");
+
+List<int> results = new List<int>();
+
+var val = 10;
+var res = Calc(val);
+
+var min = results.Min();
+var avg = results.Average();
+var max = results.Max();
+var sum = results.Sum();
+
+Console.WriteLine("\n Min :" + min + "\n Avg : " + avg + "\n Max : " + max + "\n Sum : " + sum);
+
+int Calc(int count = 50)
 {
-    // kullanıcıdan alınan başlangıc ve bitiş sayılarına göre ekrana
-    // Fizz, Buzz veya FizzBuzz yazdıran app.
-    public string FizzBuzz(int beginning, int finish) 
-    {
-        string result = "";
-        for (int i = beginning; i <= finish; i++)
-        {
-            if (i % 3 == 0 && i % 5 == 0)
-            {
-                result += "FizzBuzz ";
-            }
-            else if (i % 3 == 0)
-            {
-                result += "Fizz ";
-            }
-            else if (i % 5 == 0)
-            {
-                result += "Buzz ";
-            }
-            else
-            {
-                result += i.ToString() + " ";
-            }
-        }
+    results.Add(count);
 
-        return result;
+    if (count < 0)
+        return -1;
+    count--;
+
+    if (count % 2 == 00)
+    {
+        count -= 2;
+        return Calc(count);
     }
+    else
+    {
+        return Calc(count - 2);
+    }
+
 }
 
+// results : 10, 7, 4, 1, -2
+// min : -2
+// avg : 4
+// max : 10
+// sum : 20
 
+
+
+Console.WriteLine("18. Soru Bu metota iki pozitif tam sayı, string olarak gönderilecektir ve " +
+    "bu sayıların toplamıp geri gönderilmesi gerekiyor.");
+string Sum1(string val1, string val2)
+{
+    var number1 = Convert.ToInt32(val1);
+    var number2 = Convert.ToInt32(val2);
+    var result = number1 + number2;
+    string stringResult = result.ToString();
+    return stringResult;
+}
+
+// val 1 : 48715159489484894000000000000000000000000000000000000000000000000000000000
+// val 2 : 64545454548484848488948948000000000000000000000000000000000000000000000000
+// olabilir o zaman ne yaparsın
+// 1.cevap;
+string Sum2(string val1, string val2)
+{
+    BigInteger number1 = BigInteger.Parse(val1);
+    BigInteger number2 = BigInteger.Parse(val2);
+    BigInteger result = number1 + number2;
+    string stringResult = result.ToString();
+    return stringResult;
+}
+
+// 2.cevap;
+string Sum3(string val1, string val2)
+{
+    int carry = 0;
+    int len1 = val1.Length;
+    int len2 = val2.Length;
+    int maxLen = Math.Max(len1, len2);
+    // Bu kod, sonucun oluşturulması için bir StringBuilder nesnesi oluşturur.
+    // StringBuilder nesnesi, performansı artırmak için, string manipülasyonu yaparken daha iyi bir seçenektir.
+    // StringBuilder nesnesi, oluşturulduğunda, içinde hiçbir karakter yoktur. Bu nedenle, oluşturduğumuz StringBuilder nesnesinin, sonuç string'inin uzunluğunu aşacak kadar büyük olmasını sağlamalıyız. Bu nedenle, StringBuilder'ın kapasitesi, maxLen + 1 olarak ayarlanır.
+    StringBuilder result = new StringBuilder(maxLen + 1);
+
+    for (int i = 0; i < maxLen; i++)
+    {
+        //  digit1 değişkeni, val1 stringinin len1 - 1 - i indisindeki karakteri alır.
+        //  Bu karakterin sayı değeri hesaplanarak digit1 değişkenine atanır. Ancak,
+        //  val1 stringi, val2 stringinden daha kısa olabilir. Bu durumda, val1 stringinin sonuna
+        //  sıfır (0) karakterleri ekleyerek, val1 ve val2 stringlerinin uzunluğunu eşitlemek gerekir.
+        //  Bu işlem, i < len1 koşulunun kontrol edilmesiyle yapılır. Eğer i, len1'den küçükse,
+        //  val1 stringinin i'inci basamağındaki rakam alınır. Aksi takdirde, digit1 değişkenine sıfır atanır.
+
+        // Bu kodda, '0' karakterinin ASCII değeri, string olarak verilen sayının her bir rakamının ASCII değerinden çıkarılarak gerçek sayısal değeri elde edilir.
+        // Örneğin, eğer val1 değişkeni içindeki string olarak verilen sayı 1234 ise, bu sayının ilk rakamı 1'dir ve ASCII kodlamasına göre 49'dur. Bu nedenle, "val1[len1 - 1 - i] - '0'" işlemi yaparak, rakamın ASCII değerinden '0' karakterinin ASCII değerini çıkararak gerçek sayısal değeri olan 1'i elde ederiz.
+        int digit1 = i < len1 ? val1[len1 - 1 - i] - '0' : 0;
+        int digit2 = i < len2 ? val2[len2 - 1 - i] - '0' : 0;
+
+        int sum = digit1 + digit2 + carry;
+        carry = sum / 10;
+        // Bu kod, iki rakamın toplamının sonucunun 10'a bölümünden kalanı (modulus) hesaplayarak, toplama işleminin sonucunun sadece bir rakam olmasını sağlar.
+        // Örneğin, 7 + 9 işlemi yapılırken, toplam 16 olacaktır. Ancak, bu işlemin sonucu sadece bir rakam olmalıdır. Bu nedenle, bu kod, toplamın 10'a bölümünden kalanı hesaplar ve sonucu result değişkenine ekler.
+        //
+        sum %= 10;
+        result.Append(sum);
+    }
+
+    if (carry > 0)
+    {
+        result.Append(carry);
+    }
+
+    char[] charArray = result.ToString().ToCharArray();
+    Array.Reverse(charArray);
+    return new string(charArray);
+
+}
 
